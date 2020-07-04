@@ -1,0 +1,13 @@
+body {
+    background: #E0E0C0;
+    color: #567b8f;
+    width: 98%;
+}
+
+.btn {
+    margin: 2px;
+}
+
+a:focus {
+    outline: none;
+}

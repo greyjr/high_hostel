@@ -1,0 +1,64 @@
+<div class="b-popup" id="popup1" align="center">
+    <div class="b-popup-content">
+        <div align="center">
+
+            <form class="order_form">
+                {% csrf_token %}
+                <p align="center" style="font-size: 16px"><b><u>Размещение</u></b></p>
+
+                {% if order_form.data|length == 1 %}
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-outline-warning btn-sm active">
+                        <input type="radio" name="options" id="option1" autocomplete="off" checked>
+                        Бронирование
+                    </label>
+                    <label class="btn btn-outline-success btn-sm">
+                        <input type="radio" name="options" id="option2" autocomplete="off">
+                        Оформление заказа
+                    </label>
+                </div>
+                {% endif %}
+
+                {{ order_form.as_p }}
+
+            </form>
+            <button id="save_form" class="btn-outline-info">Сохранить</button>
+        </div>
+        <br>
+        <a href="javascript:Close();" class="btn btn-dark">Закрыть окно</a>
+    </div>
+</div>
+
+
+<script>
+    function Close() {
+        $('#order_here').empty();
+    }
+</script>
+
+<script>
+    $('#save_form').click(function () {
+
+        console.log('save');
+        $.ajax({
+            type: "POST",
+            url: '/get_order_form',
+            data: {
+                'order': 166,
+                'dataText': '{{ cell_date }}',
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+            },
+            success: function (response) {
+                $('#order_here').empty();
+                $('#content').empty();
+                $('#content').append(response);
+                $('#current_date').append('{{ cell_date }}');
+
+            },
+            error: function () {
+                alert('не удалось получить данные с сервера!');
+            }
+        })
+
+    })
+</script>
