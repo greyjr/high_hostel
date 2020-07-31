@@ -10,6 +10,7 @@
     {% load staticfiles %}
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
     <link rel="stylesheet" href="{% static 'css/front_desk.css' %}">
+    <link rel="stylesheet" href="{% static 'css/items.css' %}">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 {% endblock %}
@@ -19,8 +20,19 @@
 {% block content %}
 
     <div id="desktop">
-        <div id="order_here"></div>
-        <aside></aside>
+        <div id="pop_up_here"></div>
+
+        <aside>
+            <div>
+                <p style="font-size: 9px" align="center">Область уведомлений
+                </p>
+            </div>
+
+            <div>
+
+            </div>
+        </aside>
+
         <div id="content" align="center"></div>
     </div>
 
@@ -40,13 +52,33 @@
         $('#consumables_button')
             .click(function () {
                 $('#content').empty();
-                $("#content").load("../static/content_html/_consumables.html");
+                $.ajax({
+                    type: 'GET',
+                    url: '/get_consumables_page',
+                    {#data: {'data_for_consumable': 'some_text'},#}
+                    success: function (response) {
+                        $('#content').append(response);
+                    },
+                    error: function () {
+                        alert('не удалось получить данные с сервера, проверьте соединение!');
+                    }
+                });
             });
 
         $('#bar_button')
             .click(function () {
                 $('#content').empty();
-                $('#content').load("../static/content_html/_bar.html");
+                $.ajax({
+                    type: 'GET',
+                    url: '/get_bar_page',
+                    {#data: {'data_for_consumable': 'some_text'},#}
+                    success: function (response) {
+                        $('#content').append(response);
+                    },
+                    error: function () {
+                        alert('не удалось получить данные с сервера, проверьте соединение!');
+                    }
+                });
             });
 
         $('#chess_button')
@@ -64,7 +96,7 @@
         function get_front_desk(today) {
             $.ajax({
                 type: "GET",
-                url: '/get_more_tables',
+                url: '/get_front_desk',
                 data: {'dateText': today},
 
                 success: function (response) {
@@ -72,7 +104,7 @@
                     $('#current_date').append(today)
                 },
                 error: function () {
-                    alert('не удалось получить данные с сервера!');
+                    alert('не удалось получить данные с сервера, проверьте соединение!');
                 }
             })
         }

@@ -33,6 +33,7 @@
 }
 
 .inner_td {
+    border-collapse: collapse;
     border: dotted 1px;
     background: white;
     height: 20px;
@@ -58,6 +59,7 @@
     background: #ddd9c4;
     font-size: 12px;
     height: 20px;
+    /*font-stretch: ultra-expanded;*/
     /*color: #334455*/
 }
 
@@ -90,8 +92,12 @@
     background: linear-gradient(to bottom, #bfbfbf 50%, #a0a0a0 70%, #777777);
 }
 
-.future {
-    background: #eec560;
+.pre_or {
+    background: linear-gradient(to bottom, #eec560 50%, #ddb44f 70%, #aa811c);
+}
+
+.paid__ {
+    background: linear-gradient(to bottom, #eec560 30%, #4bbb70);
 }
 
 .b-popup {
@@ -107,7 +113,7 @@
 
     margin: 80px auto 0 20px;
     /*width: min-content;*/
-    width: 25%;
+    width: 35%;
     height: auto;
     padding: 10px;
     background-color: #c5c5c5;
@@ -117,4 +123,25 @@
 
 .order_form {
     font-size: 12px;
+    color: #1c173f;
+}
+
+.client_form {
+    font-size: 12px;
+}
+
+.form_line {
+    margin: 2px 0;
+}
+
+.btn-mini{
+    height: 20px;
+    line-height: .5;
+    font-size: 9px;
+}
+
+.div_at_row{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }

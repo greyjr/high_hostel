@@ -1,12 +1,12 @@
 <div id="choose_date" align="center" style="margin-top: 4px">
-    <span id="day_back"><<</span>
+    <span id="day_back"><a class="btn btn-sm"><img src="../static/images/left_arrow.png"></a></span>
 
     <input type="text" id="datepicker" style="width:120px; text-align: center" placeholder="Выбрать дату"
            autocomplete="off">
 
     <label id="current_date"></label>
 
-    <span id="day_forward">>></span>
+    <span id="day_forward"><a class="btn btn-sm"><img src="../static/images/right_arrow.png"></a></span>
 
     <br><img src="../static/images/day_pointer.png" alt="pointer">
 </div>
@@ -56,7 +56,7 @@
 
                 {% for cell in row.1 %}
                     <td class="inner_td {{ cell.0 }} order_{{ cell.1 }}"
-                        {% if cell.1 != 'none' %}
+                            {% if cell.1 != 'none' %}
                         title="Заказ: {{ cell.1 }}" {% endif %}>
 
                     </td>
@@ -69,9 +69,6 @@
     </tbody>
 </table>
 
-{#<div id="order_here">#}
-{##}
-{#</div>#}
 
 <!----------------------------------------->
 <script>
@@ -80,26 +77,28 @@
         let cell = event.target;
         let day_from_left_side = cell.cellIndex;
         let order_number_class = this.classList[2];
+        let row = this.parentNode.rowIndex;
 
         let yesterday = new Date();
-        yesterday.setDate(yesterday.getDate() - 2);
-        let cell_date = get_date(day_from_left_side - {{ half_interval }});
-        let [day, month, year] = cell_date.split('.');
-        let cell_date_js_format = new Date(year, month-1, day);
-        if (this.classList.contains('order_none') && yesterday > cell_date_js_format) {
-            return        }
+        yesterday.setDate(yesterday.getDate() - 1);
+        let cell_date_string = get_date(day_from_left_side - {{ half_interval }});
+        let [day, month, year] = cell_date_string.split('.');
+        let cell_date_iso = new Date(year, month - 1, day);
+        if (this.classList.contains('order_none') && yesterday > cell_date_iso) {
+            return
+        }
 
         $.ajax({
             type: "GET",
             url: '/get_order_form',
             data: {
-                'cell_date': cell_date,
+                'cell_date_string': cell_date_string,
                 'order_number_class': order_number_class,
+                'row': row,
             },
 
             success: function (response) {
-                $('#order_here').append(response);
-                console.log('second click at ajax')
+                $('#pop_up_here').append(response);
             },
             error: function () {
                 alert('не удалось получить данные с сервера!');
@@ -163,7 +162,7 @@
     function get_front_desk(date_string) {
         $.ajax({
             type: "GET",
-            url: '/get_more_tables',
+            url: '/get_front_desk',
             data: {'dateText': date_string},
 
             success: function (response) {
@@ -178,14 +177,3 @@
     }
 
 </script>
-<!----------------------------------------->
-{#<script>#}
-{#    $(function () {#}
-{#        $("#datepicker").datepicker({#}
-{#            changeMonth: true,#}
-{#            changeYear: true,#}
-{#            yearRange: "-10:+20",#}
-{#        });#}
-{#    });#}
-{#</script>#}
-<!----------------------------------------->
