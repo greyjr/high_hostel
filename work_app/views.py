@@ -20,6 +20,16 @@ def home(request):
     return render(request, 'work_app/home.html')
 
 
+def get_manage_page(request):
+    if request.method == 'GET' and request.is_ajax():
+        return render(request, 'work_app/_manage_plan.html')
+
+
+def get_state_page(request):
+    if request.method == 'GET' and request.is_ajax():
+        return render(request, 'work_app/_state.html')
+
+
 def delete_order(request):
     if request.method == 'POST' and request.is_ajax():
         Order.objects.get(id=int(request.POST['id_order'])).delete()

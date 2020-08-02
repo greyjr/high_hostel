@@ -40,13 +40,33 @@
         $('#manage_button')
             .click(function () {
                 $('#content').empty();
-                $("#content").load("../static/content_html/_plan.html");
+                 $.ajax({
+                    type: 'GET',
+                    url: '/get_manage_page',
+                    {#data: {'data_for_consumable': 'some_text'},#}
+                    success: function (response) {
+                        $('#content').append(response);
+                    },
+                    error: function () {
+                        alert('не удалось получить данные с сервера, проверьте соединение!');
+                    }
+                });
             });
 
         $('#state_button')
             .click(function () {
                 $('#content').empty();
-                $('#content').load("../static/content_html/_state.html");
+                $.ajax({
+                    type: 'GET',
+                    url: '/get_state_page',
+                    {#data: {'data_for_consumable': 'some_text'},#}
+                    success: function (response) {
+                        $('#content').append(response);
+                    },
+                    error: function () {
+                        alert('не удалось получить данные с сервера, проверьте соединение!');
+                    }
+                });
             });
 
         $('#consumables_button')

@@ -21,5 +21,7 @@ urlpatterns = [
     path('create_bar_form', create_bar_form, name='create_bar_form'),
     path('create_bar_record', create_bar_record, name='create_bar_record'),
     path('save_bar_record', save_bar_record, name='save_bar_record'),
+    path('get_manage_page', get_manage_page, name='get_manage_page'),
+    path('get_state_page', get_state_page, name='get_state_page'),
 
 ]

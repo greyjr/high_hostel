@@ -50,7 +50,7 @@
                     <tr class="item_row">
                         {% for cell in row|slice:'1:' %}
                             <td {% if row.4 > row.5 and forloop.counter == 2 %}
-                                style="color: #ff1a1a; text-align: left; padding-left: 20px" {% endif %}
+                                style="color: #ff1a1a; text-align: left; padding-left: 10px" {% endif %}
                                     {% if forloop.counter == 2 %}
                                 style="text-align: left; padding-left: 10px" {% endif %}
                                 title="{% if row.0 != '' %}запись_№_{% endif %}{{ row.0 }}">
@@ -74,7 +74,7 @@
                     <tr class="item_row">
                         {% for cell in row|slice:"1:" %}
                             <td {% if row.4 > row.5 and forloop.counter == 2 %}
-                                style="color: #ff1a1a; text-align: left; padding-left: 20px" {% endif %}
+                                style="color: #ff1a1a; text-align: left; padding-left: 10px" {% endif %}
                                     {% if forloop.counter == 2 %}
                                 style="text-align: left; padding-left: 10px" {% endif %}
                                 title="{% if row.0 != '' %}запись_№_{% endif %}{{ row.0 }}">

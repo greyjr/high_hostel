@@ -25,7 +25,7 @@ aside {
 }
 
 .room_row_bottom > .room {
-    display: inline-grid;
+    /*display: inline-grid;*/
 }
 
 .room {
@@ -35,11 +35,19 @@ aside {
     background-image: url("../images/back_room.png");
 }
 
-.bed {
+.plan_bed {
     margin: 5px 5px 10px 5px;
 }
 
-.bed:hover {
+.bed_free {
+    content: url("../images/free_bed.png");
+}
+
+.bed_taken{
+    content: url("../images/taken_bed.png");
+}
+
+.plan_bed:hover {
     opacity: 0.5;
 }
 
@@ -56,7 +64,6 @@ aside {
     height: 28px;
     font-size: 20px;
     text-align: center;
-
 }
 
 .room_manage {
@@ -67,5 +74,4 @@ aside {
     width: 70px;
     font-size: 20px;
     text-align: center;
-    vertical-align: center;
 }

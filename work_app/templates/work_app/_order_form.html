@@ -353,7 +353,7 @@
                 csrfmiddlewaretoken: '{{ csrf_token }}',
             },
             success: function (response) {
-                $('#order_here').empty();
+                $('#pop_up_here').empty();
                 $('#content').empty();
                 $('#content').append(response);
                 $('#current_date').append('{{ cell_date_string }}');
